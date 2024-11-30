@@ -2,11 +2,14 @@
 $url = 'https://data.gov.bh/api/explore/v2.1/catalog/datasets/01-statistics-of-students-nationalities_updated/records?where=colleges%20like%20%22IT%22%20AND%20the_programs%20like%20%22bachelor%22&limit=100';
 $response = file_get_contents($url);
 
-if ($response === FALSE) {
+$result= json_decode($response, true);
+
+$result = $result['results'];
+
+if (empty($result) || $response === FALSE) {
     die("Error retrieving data. Please try again later.");
 }
 
-$data = json_decode($response, true);
 ?>
 
 <!DOCTYPE html>
@@ -34,17 +37,18 @@ $data = json_decode($response, true);
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($data['records'] as $record): ?>
-                    <?php $fields = $record['record']['fields']; ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($fields['academic_year']); ?></td>
-                        <td><?php echo htmlspecialchars($fields['semester']); ?></td>
-                        <td><?php echo htmlspecialchars($fields['the_programs']); ?></td>
-                        <td><?php echo htmlspecialchars($fields['nationality']); ?></td>
-                        <td><?php echo htmlspecialchars($fields['colleges']); ?></td>
-                        <td><?php echo htmlspecialchars($fields['number_of_students']); ?></td>
-                    </tr>
-                <?php endforeach; ?>
+                <?php
+            foreach ($result as $row) {
+                echo "<tr>";
+                echo "<td>" . $row['year'] . "</td>";
+                echo "<td>" . $row['semester']  . "</td>";
+                echo "<td>" . $row['the_programs']  . "</td>";
+                echo "<td>" . $row['nationality']  . "</td>";
+                echo "<td>" . $row['colleges']  . "</td>";
+                echo "<td>" . $row['number_of_students'] . "</td>";
+                echo "</tr>";
+            }
+            ?>
                 </tbody>
             </table>
         </div>
