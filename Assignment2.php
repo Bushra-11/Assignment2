@@ -37,12 +37,12 @@ $data = json_decode($response, true);
                 <?php foreach ($data['records'] as $record): ?>
                     <?php $fields = $record['record']['fields']; ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($fields['academic_year'] ?? 'N/A'); ?></td>
-                        <td><?php echo htmlspecialchars($fields['semester'] ?? 'N/A'); ?></td>
-                        <td><?php echo htmlspecialchars($fields['the_programs'] ?? 'N/A'); ?></td>
-                        <td><?php echo htmlspecialchars($fields['nationality'] ?? 'N/A'); ?></td>
-                        <td><?php echo htmlspecialchars($fields['colleges'] ?? 'N/A'); ?></td>
-                        <td><?php echo htmlspecialchars($fields['number_of_students'] ?? 'N/A'); ?></td>
+                        <td><?php echo htmlspecialchars($fields['academic_year']); ?></td>
+                        <td><?php echo htmlspecialchars($fields['semester']); ?></td>
+                        <td><?php echo htmlspecialchars($fields['the_programs']); ?></td>
+                        <td><?php echo htmlspecialchars($fields['nationality']); ?></td>
+                        <td><?php echo htmlspecialchars($fields['colleges']); ?></td>
+                        <td><?php echo htmlspecialchars($fields['number_of_students']); ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
